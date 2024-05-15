@@ -1,0 +1,144 @@
+<!-- frontend/public/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Visualization Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #1a1a1a;
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+    .sidebar a {
+      padding: 10px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+    .sidebar a:hover {
+      color: #f1f1f1;
+      background-color: #333;
+    }
+    .sidebar h2 {
+      color: #fff;
+      text-align: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #333;
+      margin-bottom: 20px;
+    }
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .box {
+      width: 30%;
+      padding: 20px;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Data Visualization Dashboard</h1>
+  </div>
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <a href="#">Home</a>
+    <a href="#">Data</a>
+    <a href="#">Charts</a>
+    <a href="#">Settings</a>
+  </div>
+  <div class="content">
+    <div class="box">
+      <h2>Growth Chart (Bar)</h2>
+      <canvas id="growthBarChart" width="400" height="400"></canvas>
+    </div>
+    <div class="box">
+      <h2>Total Value (Line)</h2>
+      <canvas id="totalLineChart" width="400" height="400"></canvas>
+    </div>
+    <div class="box">
+      <h2>Other Chart (Pie)</h2>
+      <canvas id="otherPieChart" width="400" height="400"></canvas>
+    </div>
+  </div>
+  <script>
+    // JavaScript code to display different types of charts using Chart.js
+    var growthBarCtx = document.getElementById('growthBarChart').getContext('2d');
+    var growthBarChart = new Chart(growthBarCtx, {
+      type: 'bar',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+          label: 'Growth',
+          data: [12, 19, 3, 5, 2, 3, 7],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    var totalLineCtx = document.getElementById('totalLineChart').getContext('2d');
+    var totalLineChart = new Chart(totalLineCtx, {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+          label: 'Total Value',
+          data: [65, 59, 80, 81, 56, 55, 40],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      }
+    });
+
+    var otherPieCtx = document.getElementById('otherPieChart').getContext('2d');
+    var otherPieChart = new Chart(otherPieCtx, {
+      type: 'pie',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow'],
+        datasets: [{
+          label: 'Other Data',
+          data: [300, 50, 100],
+          backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)'
+          ],
+          hoverOffset: 4
+        }]
+      }
+    });
+  </script>
+</body>
+</html>
